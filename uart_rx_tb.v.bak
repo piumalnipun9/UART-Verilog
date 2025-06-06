@@ -1,0 +1,87 @@
+`timescale 1ns/1ps
+
+module uart_rx_tb;
+
+    // Parameters from DUT
+    localparam CLK_RATE = 50000000;     // 50 MHz
+    localparam BAUD_RATE = 115200;
+    localparam BITS_PER_WORD = 8;
+    localparam CLOCKS_PER_BIT = CLK_RATE / BAUD_RATE;
+    localparam CLK_PERIOD = 20; // 50MHz = 20ns
+
+    // DUT I/O
+    logic clk;
+    logic rstn;
+    logic rx;
+    logic [7:0] data_out;
+    logic data_valid;
+
+    // Instantiate the DUT
+    uart_rx #(
+        .CLK_RATE(CLK_RATE),
+        .BAUD_RATE(BAUD_RATE),
+        .BITS_PER_WORD(BITS_PER_WORD)
+    ) dut (
+        .clk(clk),
+        .rstn(rstn),
+        .rx(rx),
+        .data_out(data_out),
+        .data_valid(data_valid)
+    );
+
+    // Clock generation: 50MHz
+    always #(CLK_PERIOD / 2) clk = ~clk;
+
+    // UART sender task: send 1 byte over rx line using 8N1
+    task send_uart_byte(input [7:0] data);
+        integer i;
+        begin
+            // Start bit
+            rx = 0;
+            #(CLOCKS_PER_BIT * CLK_PERIOD);
+
+            // Data bits (LSB first)
+            for (i = 0; i < 8; i = i + 1) begin
+                rx = data[i];
+                #(CLOCKS_PER_BIT * CLK_PERIOD);
+            end
+
+            // Stop bit
+            rx = 1;
+            #(CLOCKS_PER_BIT * CLK_PERIOD);
+        end
+    endtask
+
+    // Stimulus
+    initial begin
+        // Initialize signals
+        clk = 0;
+        rstn = 0;
+        rx = 1; // Idle state of UART line is HIGH
+
+        // Reset pulse
+        #200;
+        rstn = 1;
+
+        // Wait a bit after reset
+        #200;
+
+        // Send 4 bytes one by one
+        send_uart_byte(8'hA1);
+        send_uart_byte(8'hB2);
+        send_uart_byte(8'hC3);
+        send_uart_byte(8'hD4);
+
+        // Wait to observe output
+        #10000;
+
+        $finish;
+    end
+
+    // Monitor output
+    initial begin
+        $display("Time\t\tdata_valid\tdata_out");
+        $monitor("%t\t%b\t\t%h", $time, data_valid, data_out);
+    end
+
+endmodule

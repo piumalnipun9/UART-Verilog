@@ -1,0 +1,121 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/User/Documents/FPGA
+vuart_full_tb
+Z1 !s110 1747971715
+!i10b 1
+!s100 ddeF2_@hVJbC@e?LAUa5b2
+Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IKX7jn:VoADBDKC9g6G=^o3
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1747851229
+8C:/Users/User/Documents/FPGA/uart_full_tb.v
+FC:/Users/User/Documents/FPGA/uart_full_tb.v
+!i122 72
+L0 2 184
+Z4 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z5 !s108 1747971715.000000
+!s107 C:/Users/User/Documents/FPGA/uart_full_tb.v|
+!s90 -reportprogress|300|C:/Users/User/Documents/FPGA/uart_full_tb.v|
+!i113 1
+Z6 tCvgOpt 0
+vuart_rx
+R1
+!i10b 1
+!s100 bcF13zg:W^E8o3QFV53`l1
+R2
+I[70]KlT3PUAM5JNFERm;Z2
+R3
+R0
+w1747850379
+8C:/Users/User/Documents/FPGA/uart_rx.v
+FC:/Users/User/Documents/FPGA/uart_rx.v
+!i122 73
+L0 2 87
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/User/Documents/FPGA/uart_rx.v|
+!s90 -reportprogress|300|C:/Users/User/Documents/FPGA/uart_rx.v|
+!i113 1
+R6
+vuart_rx_tb
+R1
+!i10b 1
+!s100 j0DSnRD<i7R=<mHEb[9jE2
+R2
+IN5O<]HZWdia1_dla`fdEK2
+R3
+R0
+w1747846739
+8C:/Users/User/Documents/FPGA/uart_rx_tb.v
+FC:/Users/User/Documents/FPGA/uart_rx_tb.v
+!i122 74
+L0 2 116
+R4
+r1
+!s85 0
+31
+R5
+!s107 C:/Users/User/Documents/FPGA/uart_rx_tb.v|
+!s90 -reportprogress|300|C:/Users/User/Documents/FPGA/uart_rx_tb.v|
+!i113 1
+R6
+vuart_tx
+Z7 !s110 1747971716
+!i10b 1
+!s100 LlKUTJI`8Oh>mdH32caBM1
+R2
+IS3Ma[8PT1=;V?;K41ggaB2
+R3
+R0
+w1747743503
+8C:/Users/User/Documents/FPGA/uart_tx.v
+FC:/Users/User/Documents/FPGA/uart_tx.v
+!i122 75
+L0 2 103
+R4
+r1
+!s85 0
+31
+Z8 !s108 1747971716.000000
+!s107 C:/Users/User/Documents/FPGA/uart_tx.v|
+!s90 -reportprogress|300|C:/Users/User/Documents/FPGA/uart_tx.v|
+!i113 1
+R6
+vuart_tx_tb
+R7
+!i10b 1
+!s100 5OPXOGWDXYdaDDAWlN[=j0
+R2
+IIP?]f5bMm2oDX>iOEDL?d0
+R3
+R0
+w1747743574
+8C:/Users/User/Documents/FPGA/uart_tx_tb.v
+FC:/Users/User/Documents/FPGA/uart_tx_tb.v
+!i122 76
+L0 2 163
+R4
+r1
+!s85 0
+31
+R8
+!s107 C:/Users/User/Documents/FPGA/uart_tx_tb.v|
+!s90 -reportprogress|300|C:/Users/User/Documents/FPGA/uart_tx_tb.v|
+!i113 1
+R6

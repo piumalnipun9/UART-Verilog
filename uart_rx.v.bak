@@ -1,0 +1,89 @@
+module uart_rx #(
+
+    parameter CLK_RATE = 50000000,
+    parameter BAUD_RATE = 115200,     // e.g., 50MHz clock / 115200 baud
+    parameter BITS_PER_WORD  = 8,
+	 
+	 localparam CLOCKS_PER_BIT= CLK_RATE/BAUD_RATE
+)(
+    input  logic clk,
+    input  logic rstn,
+    input  logic rx,
+    output logic [7:0] data_out,
+    output logic data_valid
+);
+    typedef enum logic [1:0] {IDLE, START, DATA, STOP} state_t;
+    state_t state;
+
+    logic [$clog2(CLOCKS_PER_BIT)-1:0] clk_count;
+    logic [$clog2(BITS_PER_WORD)-1:0] bit_index;
+    logic [7:0] rx_shift;
+
+    always_ff @(posedge clk or negedge rstn) begin
+	 
+        if (!rstn) begin
+            state      <= IDLE;
+            clk_count  <= 0;
+            bit_index  <= 0;
+            rx_shift   <= 0;
+            data_out   <= 0;
+            data_valid <= 0;
+				
+        end else begin
+            data_valid <= 0;  // default
+
+            case (state)
+				
+                IDLE: begin
+                    if (!rx) begin // Start bit detected
+                        state     <= START;
+                        clk_count <= CLOCKS_PER_BIT / 2;
+                    end
+                end
+					 
+					 
+
+                START: begin
+                    if (clk_count == CLOCKS_PER_BIT - 1) begin
+                        clk_count <= 0;
+                        state <= DATA;
+                        bit_index <= 0;
+                    end else begin
+                        clk_count <= clk_count + 1;
+                    end
+                end
+					 
+					 
+
+                DATA: begin
+                    if (clk_count == CLOCKS_PER_BIT - 1) begin
+                        clk_count <= 0;
+                        rx_shift <= {rx, rx_shift[7:1]};
+                        if (bit_index == BITS_PER_WORD - 1) begin
+                            state <= STOP;
+                        end else begin
+                            bit_index <= bit_index + 1;
+                        end
+                    end else begin
+                        clk_count <= clk_count + 1;
+                    end
+                end
+
+					 
+					 
+                STOP: begin
+                    if (clk_count == CLOCKS_PER_BIT - 1) begin
+                        clk_count <= 0;
+                        state <= IDLE;
+                        data_out <= rx_shift;
+                        data_valid <= 1;
+                    end else begin
+                        clk_count <= clk_count + 1;
+                    end
+                end
+					 
+					 
+            endcase
+        end
+    end
+endmodule
