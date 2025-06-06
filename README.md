@@ -20,20 +20,6 @@ This project implements a complete **UART (Universal Asynchronous Receiver/Trans
 
 ---
 
-## 📁 Project Structure
-
-├── uart_tx.v # UART Transmitter Module
-├── uart_rx.v # UART Receiver Module
-├── uart_top.v # Top-level integration
-├── tb_uart_tx.v # Testbench for Transmitter
-├── tb_uart_rx.v # Testbench for Receiver
-├── tb_uart_loopback.v # Full system testbench
-├── README.md # Project overview
-└── docs/UART Report.pdf # Full documentation
-
-
----
-
 ## 🧠 System Overview
 
 ### UART Architecture
